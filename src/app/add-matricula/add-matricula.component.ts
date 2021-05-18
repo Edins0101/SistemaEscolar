@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Aluno } from '../models/aluno.model';
 import { Curso } from '../models/curso.model';
+import { ListaMatriculaCurso } from '../models/matricula.model';
 import { AlunoService } from '../services/aluno.service';
 import { CursoService } from '../services/curso.service';
 import { MatriculaService } from '../services/matricula.service';
@@ -13,7 +14,8 @@ import { MatriculaService } from '../services/matricula.service';
 })
 export class AddMatriculaComponent implements OnInit {
 
-  matricula
+  listaMatriculaCurso = new ListaMatriculaCurso();
+
   matriculas :any[];
   operacao = 'Inserir';
 
@@ -26,7 +28,6 @@ export class AddMatriculaComponent implements OnInit {
   cursosCadastrados: any = [];
   cursoSelecionado
   dataMatriculaCurso
-  codigo = 0;
 
   constructor(private matriculaService: MatriculaService, private alunoService: AlunoService,
     private cursoService: CursoService, private router: Router) { }
@@ -36,15 +37,9 @@ export class AddMatriculaComponent implements OnInit {
     this.getCursos();
   }
 
-  AddCursoInMatricula(curso, dataMatriculaCurso) {
-
-    let listaMatriculaCurso = {
-      "codigo": this.codigo,
-      "curso": curso,
-      "dataMatriculaCurso": dataMatriculaCurso
-    }
-    this.cursosCadastrados.push(listaMatriculaCurso);
-    this.codigo++;
+  AddCursoEmMatricula() {
+    debugger
+    this.cursosCadastrados.push(this.listaMatriculaCurso);
   }
 
   getAlunos() {
@@ -70,13 +65,13 @@ export class AddMatriculaComponent implements OnInit {
   }
 
   saveMatricula() {
-    let matriculaobjeto = {
+    let matricula = {
       "aluno": this.alunoSelecionado,
       "listaMatriculaCurso":
         this.cursosCadastrados
     }
 
-    this.matriculaService.saveMatricula(matriculaobjeto).subscribe(
+    this.matriculaService.saveMatricula(matricula).subscribe(
       data => {
         alert('Salvo com sucesso');
         this.router.navigate(['matricula']);

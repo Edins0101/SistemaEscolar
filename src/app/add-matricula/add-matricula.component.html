@@ -19,7 +19,7 @@
       <div class="form-group col-6">
         <label class="col-3 col-form-label">Curso: </label>
         <div class="col-12">
-          <select class="form-select" [(ngModel)]="cursoSelecionado">
+          <select class="form-select" [(ngModel)]="this.listaMatriculaCurso.curso">
             <option selected [ngValue]="" >Selecione</option>
             <option *ngFor="let curso of cursos" [ngValue]="curso">{{ curso.nome }}</option>
           </select>
@@ -28,11 +28,11 @@
       <div class="form-group col-6">
         <label class="col-3 col-form-label">Data Matrícula: </label>
         <div class="col-12">
-          <input [ngModel]="dataMatriculaCurso | date:'yyyy-MM-dd'" (ngModelChange)="dataMatriculaCurso = $event" type="date"/>
+          <input [ngModel]="this.listaMatriculaCurso.dataMatriculaCurso | date:'yyyy-MM-dd'" (ngModelChange)="this.listaMatriculaCurso.dataMatriculaCurso = $event" type="date"/>
         </div>
       </div>
       <div class="buttons col-2">
-        <button class="btn btn-primary" (click)="AddCursoInMatricula(cursoSelecionado, dataMatriculaCurso)">Adicionar</button>
+        <button class="btn btn-primary" (click)="AddCursoEmMatricula()">Adicionar</button>
       </div>
     </div>
     <div class="col-12">
