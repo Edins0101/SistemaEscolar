@@ -1,0 +1,39 @@
+<div class="container">
+  <div>
+    <h1>Matricula</h1>
+  </div>
+  <div>
+    <div class="form-group">
+      <label class="col-2 col-form-label">Aluno: </label>
+      <div class="col-12">
+        <select class="form-select" #search>
+          <option selected  [value]="0">Selecione</option>
+          <option *ngFor="let matricula of matriculas" [value]="matricula.aluno.codigo">{{ matricula.aluno.nome }}</option>
+        </select>
+      </div>
+    </div>
+    <button type="button" (click)="searchMatricula(search.value)" class="btn btn-primary">Pesquisar</button>
+  </div>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Código</th>
+          <th scope="col">Nome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let matricula of matriculas">
+          <td><input type="radio" name="alunoSelected" (change)="selecionar(matricula)"></td>
+          <td>{{ matricula.codigo }}</td>
+          <td>{{ matricula.aluno.nome }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <button type="button" (click)="goToAddMatricula()" class="btn btn-primary">Incluir</button>
+    <button type="button" (click)="deleteMatricula()" class="btn btn-primary">Excluir</button>
+  </div>
+</div>

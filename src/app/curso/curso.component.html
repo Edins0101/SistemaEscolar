@@ -1,0 +1,45 @@
+<div class="container">
+  <div>
+    <h1>Curso</h1>
+  </div>
+  <div>
+    <div class="form-group">
+      <label class="col-2 col-form-label">Nome: </label>
+      <div class="col-12">
+        <input type="text" class="form-control" #search/>
+      </div>
+    </div>
+    <button type="button" (click)="searchCurso(search.value)" class="btn btn-primary">Pesquisar</button>
+  </div>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Código</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Carga Horária</th>
+          <th scope="col">Data de Início</th>
+          <th scope="col">Instrutor</th>
+          <th scope="col">Local</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let curso of cursos">
+          <td><input type="radio" name="cursoSelected" (change)="selecionar(curso)"></td>
+          <td>{{ curso.codigo }}</td>
+          <td>{{ curso.nome }}</td>
+          <td>{{ curso.cargaHoraria }}</td>
+          <td>{{ curso.dataInicio | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ curso.instrutor }}</td>
+          <td>{{ curso.local }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <button type="button" (click)="goToAddCurso()" class="btn btn-primary">Incluir</button>
+    <button [disabled]="!this.cursoSelecionado" type="button" (click)="goToEditCurso()" class="btn btn-primary">Alterar</button>
+    <button [disabled]="!this.cursoSelecionado" type="button" (click)="deleteCurso()" class="btn btn-primary">Excluir</button>
+  </div>
+</div>

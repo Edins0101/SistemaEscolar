@@ -1,0 +1,61 @@
+<div class="container">
+  <div>
+    <h1>Matrícula - {{ operacao }}</h1>
+  </div>
+  <div>
+    <div class="form-group">
+      <label class="col-2 col-form-label">Aluno: </label>
+      <div class="col-12">
+        <select class="form-select" [(ngModel)]="alunoSelecionado">
+          <option selected >Selecione</option>
+          <option *ngFor="let aluno of alunos" [ngValue]="aluno">{{ aluno.nome }}</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <h1>Adicionar curso</h1>
+    </div>
+    <div class="row">
+      <div class="form-group col-6">
+        <label class="col-3 col-form-label">Curso: </label>
+        <div class="col-12">
+          <select class="form-select" [(ngModel)]="cursoSelecionado">
+            <option selected [ngValue]="" >Selecione</option>
+            <option *ngFor="let curso of cursos" [ngValue]="curso">{{ curso.nome }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label class="col-3 col-form-label">Data Matrícula: </label>
+        <div class="col-12">
+          <input [ngModel]="dataMatriculaCurso | date:'yyyy-MM-dd'" (ngModelChange)="dataMatriculaCurso = $event" type="date"/>
+        </div>
+      </div>
+      <div class="buttons col-2">
+        <button class="btn btn-primary" (click)="AddCursoInMatricula(cursoSelecionado, dataMatriculaCurso)">Adicionar</button>
+      </div>
+    </div>
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Curso</th>
+            <th scope="col">Data Matricula</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let cursosCadastrado of cursosCadastrados">
+            <td>{{ cursosCadastrado.curso.nome }}</td>
+            <td>{{ cursosCadastrado.dataMatriculaCurso | date: 'dd/MM/yyyy' }}</td>
+            <td><a (click)="removerMatricula(cursosCadastrado.curso.codigo)">X</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="buttons col-2">
+    <button *ngIf="operacao === 'Inserir'" type="button" (click)="saveMatricula()" class="btn btn-primary">Incluir</button>
+    <button type="button" (click)="backToMatricula()" class="btn btn-primary">Voltar</button>
+  </div>
+</div>

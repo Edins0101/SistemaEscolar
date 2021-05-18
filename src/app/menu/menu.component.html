@@ -1,0 +1,18 @@
+<ul class="list-unstyled">
+  <li *ngFor="let menu of menus">
+    <a routerLink="../{{menu.key}}">{{ menu.value }}</a>
+  </li>
+</ul>
+
+<!--
+<ul ngbNav  class="nav-pills" orientation="vertical">
+  <li  *ngFor="let menu of menus">
+    <a ngbNavLink routerLink="menu.key">{{ menu.value }}</a>
+  </li>
+</ul> -->
+
+<!-- <ul ngbNav class="nav-tabs">
+  <li ngbNavItem *ngFor="let link of links">
+    <a ngbNavLink routerLink="" [fragment]="link.fragment">{{ link.title }}</a>
+  </li>
+</ul> -->
